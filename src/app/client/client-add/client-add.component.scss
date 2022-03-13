@@ -1,0 +1,57 @@
+.client-add {
+    max-height: calc(100vh - 112px); 
+    min-height: calc(100vh - 112px); 
+    height: calc(100vh - 112px); 
+    overflow-y: auto;
+    padding: 1rem;
+    &-heading {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+
+    .sub-header {
+        margin: 0;
+    }
+
+    .input-container {
+        width: 28%;
+        margin-right: 2rem;
+        margin-top: 1rem;
+
+        .form-field {
+            width: 100%;
+        }
+    }
+
+    .client-details {
+        &-container {
+            display: flex; 
+            justify-content: flex-start; 
+            flex-wrap: wrap;
+        }
+    }
+
+    .transaction-details {
+        margin-top: .5em;
+        &-container {
+            display: flex; 
+            justify-content: flex-start; 
+            flex-wrap: wrap;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: row-reverse;
+        .submit-button {
+            margin-left: 1rem;
+        }
+    }
+}
+
+.error-message {
+    color: red;
+    margin-top: -1rem;
+}
+
+

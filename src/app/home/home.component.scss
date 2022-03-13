@@ -1,0 +1,83 @@
+.home-details {
+    padding: 1rem;
+    .count-container {
+        display: flex;
+        margin-bottom: 1rem;
+        .count-box {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 14vh;
+            .total-count {
+                .count-header {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+                .count {
+                    font-size: 20px;
+                    margin-top: .7rem;
+                    font-weight: 500;
+                    text-align: center;
+                }
+            }
+        }
+
+        .count-box:nth-child(1), 
+        .count-box:nth-child(2) {
+            margin-right: 1rem;
+        }
+    }
+    .home-table-container {
+        display: flex;
+    }
+    .small-container {
+        flex: 2;
+        min-height: 57vh;
+        margin-right: 1rem;
+        .client-details-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem;
+            .client-name-container {
+                .client-name {
+                    font-size: 16px;
+                    font-weight: 300;
+                    margin-bottom: .3rem;
+                }
+                .client-type {
+                    color: rgba($color: #000000, $alpha: 0.6);
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .large-container {
+        flex: 3;
+    }
+}
+
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+    width: 180px;
+}
+
+.mat-column-typeOfAssignment {
+    width: 180px;
+}
+
+.mat-column-fees {
+    width: 100px;
+}
+
+
+.mat-column-updatedDate {
+    width: 160px;
+}
+
+
+.mat-column-status {
+    width: 100px;
+}

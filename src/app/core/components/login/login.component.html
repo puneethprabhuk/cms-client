@@ -1,0 +1,48 @@
+<div class='login-container'>
+    <div class="login-overlay"></div>
+    <div class="login-image-container">
+        <div class="login-title-container">
+            <h1 class='main-title'>CMS</h1>
+            <div class='credit-text-container'>
+                <div class='credit-text'>Designed & Developed by</div>
+                <div class='credit-text'>Puneeth Prabhu</div>
+            </div>
+        </div>
+    </div>
+    <div class="login-input-container">
+        <div class="login-flex-container">
+            <form [formGroup]="signInForm" class="login-flex-item">
+                <div class='login-text'>
+                    <mat-icon class='user-icon'>person</mat-icon> Login
+                </div>
+                <div>
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Email Id</mat-label>
+                            <input matInput type="text" formControlName="email">
+                        </mat-form-field>
+                        <div class="error-message" *ngIf="(signInSubmitted && fSignIn.email.invalid) || fSignIn.email.touched">
+                            <small *ngIf="fSignIn.email.errors?.required" class="text-small text-danger">Please enter email id</small>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+                            <mat-icon style="cursor: pointer;" matSuffix (click)="hidePassword = !hidePassword">
+                                {{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        </mat-form-field>
+                        <div class="error-message" *ngIf="(signInSubmitted && fSignIn.password.invalid) || fSignIn.password.touched">
+                            <small *ngIf="fSignIn.password.errors?.required" class="text-small text-danger">Please enter password</small>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="onSubmitSignIn()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

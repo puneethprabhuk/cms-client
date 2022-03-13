@@ -1,0 +1,6 @@
+<h2>{{titleText}}</h2>
+<div>{{messageText}}</div>
+<div class="button-container" style="margin-top: 1rem; display: flex; flex-direction: row-reverse;">
+    <button mat-raised-button color="{{confirmButtonColor}}" (click)="confirm()">{{confirmText}}</button>
+    <button mat-stroked-button color="primary" style="margin-right: 1rem;" (click)="closeModal()">{{cancelText}}</button>
+</div>

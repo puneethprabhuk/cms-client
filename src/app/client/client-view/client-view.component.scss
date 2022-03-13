@@ -1,0 +1,109 @@
+.client-view {
+    padding: 1rem;
+    max-height: calc(100vh - 112px); 
+    min-height: calc(100vh - 112px); 
+    height: calc(100vh - 112px); 
+    overflow-y: auto;
+    &-heading {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+
+    .view-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .name-container {
+            display: flex;
+            align-items: center;
+            .name {
+                font-size: 16px;
+                font-weight: 500;
+                margin-left: 1rem;
+            }
+
+            img {
+                height: 40px;
+                width: 40px;
+            }
+        }
+    }
+
+    .view-body {
+        border: 1px solid rgb(194, 191, 191);
+        border-radius: 10px;
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+
+            mat-icon {
+                margin-right: .5rem;
+            }
+
+        }
+    }
+
+    .remarks-container {
+        background-color: #DFDFDF;
+        color: rgb(75, 74, 74);
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 10px;
+        font-style: italic;
+    }
+
+    .transaction-list {
+        margin-top: 1rem;
+        .transaction-list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
+
+
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+    width: 150px;
+}
+
+.mat-column-typeOfAssignment {
+    width: 140px;
+}
+
+.mat-column-fees {
+    width: 80px;
+}
+
+.mat-column-financialYear {
+    width: 120px;
+}
+
+.mat-column-assessmentYear {
+    width: 120px;
+}
+
+.mat-column-updatedDate {
+    width: 120px;
+}
+
+.mat-column-createdDate {
+    width: 120px;
+}
+
+.mat-column-status {
+    width: 120px;
+}
+
+.mat-column-action {
+    width: 120px;
+}

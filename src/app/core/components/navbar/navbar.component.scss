@@ -1,0 +1,40 @@
+.navbar {
+    max-height: calc(100vh - 112px); 
+    min-height: calc(100vh - 112px); 
+    height: calc(100vh - 112px); 
+    background-color: #F2F2F2;
+    padding: 1.5rem 1rem;
+
+    &-header {
+        font-size: 16px;
+        color: rgb(126, 126, 128);
+        font-weight: 600;
+    }
+
+    &-container {
+        list-style: none;
+        margin-top: 2rem;
+        padding: 0;
+    }
+
+    &-item {
+        margin-top: 1rem;
+        font-size: 1rem;
+        padding: 0.8rem;
+        border-radius: 10px;
+        color: #3F51B5;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &-active {
+            background-color: #3F51B5;
+            color: #fff;
+        }
+    } 
+
+    &-icon {
+        margin-right: .7rem;
+    }
+
+}

@@ -1,0 +1,35 @@
+mat-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .profile-details {
+        display: flex;
+        align-items: center;
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: .5rem;
+            height: 40px;
+            width: 40px;
+            background-color: coral;
+            border-radius: 50%;
+        }
+        .profile-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: .5rem;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                
+            }
+        }
+    }
+}

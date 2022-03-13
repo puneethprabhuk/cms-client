@@ -1,0 +1,103 @@
+<div class="client-view">
+    <div class="client-view-header">
+        <h1 class="client-view-heading">Client Details</h1>
+    </div>
+    <mat-card>
+        <div class="view-header">
+            <div class="name-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE9tG_NFfmLde3aA3q3p2yib1KJslRRNlJQg&usqp=CAU" alt="">
+                <div class="name">{{clientDetails?.firstName}} {{clientDetails?.lastName}}</div>
+            </div>
+            <div class="button-container">
+              <button mat-raised-button color="primary" (click)="openEditClientPopup()" style="margin-right: 1rem;">Edit</button>
+              <button mat-raised-button color="warn" (click)="openDeleteClient()">Delete</button>
+            </div>
+        </div>
+        <div class="view-body">
+            <div>
+                <mat-icon>local_phone</mat-icon>
+                <span>{{clientDetails?.contactNumber}}</span>
+            </div>
+            <div>
+                <mat-icon>email</mat-icon>
+                <span>{{clientDetails?.emailAddress}}</span>
+            </div>
+            <div>
+                <mat-icon>location_city</mat-icon>
+                <span>{{clientDetails?.address}}</span>
+            </div>
+        </div>
+        <div class="remarks-container">
+            "{{clientDetails?.remarks}}"
+        </div>
+    </mat-card>
+
+    <mat-card class="transaction-list">
+        <div class="transaction-list-header">
+            <h2>Transaction List ({{count}})</h2>
+            <button mat-raised-button color="primary" (click)="openAddTransactionPopup()">Add Transaction</button>
+        </div>
+        <div class="empty-container" *ngIf="clientDetails?.transactionDetails && clientDetails?.transactionDetails.length === 0">
+          <h3 style="font-style: italic; color: rgb(131, 128, 128);">No transactions</h3>
+        </div>
+        <div class="table" *ngIf="clientDetails?.transactionDetails && clientDetails?.transactionDetails.length > 0">
+            <table mat-table [dataSource]="dataSource">
+              <ng-container matColumnDef="typeOfAssignment">
+                <th mat-header-cell *matHeaderCellDef>Type of Assignment</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.typeOfAssignment }} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="fees">
+                <th mat-header-cell *matHeaderCellDef>Fees</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.fees }} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="financialYear">
+                <th mat-header-cell *matHeaderCellDef>Financial Year</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.financialYear }}  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="assessmentYear">
+                <th mat-header-cell *matHeaderCellDef>Assessment Year</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.assessmentYear }}  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef>Created Date</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.createdAt | date: 'mediumDate' }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="updatedDate">
+                <th mat-header-cell *matHeaderCellDef>Updated Date</th>
+                <td mat-cell *matCellDef="let transaction"> {{ transaction.updatedAt | date: 'mediumDate' }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let transaction" [ngClass]="{'pending': transaction.status === 'Pending', 'received' : transaction.status === 'Received' }"> {{ transaction.status }}  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let transaction">
+                    <button mat-icon-button color="primary" (click)="openAddTransactionPopup(transaction)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons 
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
+          </div>
+    </mat-card>
+</div>
+
+<app-transaction-add *ngIf="openTransactionAdd" (close)="closeAddTransactionPopup($event)" [clientId]="clientId" [transactionDetails]="selectedTransaction"></app-transaction-add>
+<app-client-update *ngIf="openClientUpdate" (close)="closeEditClientPopup($event)" [clientDetails]="clientDetails"></app-client-update>
+<app-confirmation-window (close)="closeDeleteClient($event)" *ngIf="openDeleteConf" [action]="deleteAction" [titleText]="titleText" [messageText]="messageText" [confirmText]="confirmText" [cancelText]="cancelText"></app-confirmation-window>

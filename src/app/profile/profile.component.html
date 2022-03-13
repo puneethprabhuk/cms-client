@@ -1,0 +1,133 @@
+<div class="profile">
+    <div class="profile-header">
+        <h1 class="profile-heading">Profile</h1>
+    </div>
+
+    <form [formGroup]="profileForm">
+        <mat-card class="profile-details">
+            <div class="profile-image-container">
+                <div class="image" *ngIf="selectedFile">
+                    <img src="{{ selectedFile.src }}" alt="">
+                </div>
+                <div class="image" *ngIf="profileDetails?.image && !selectedFile">
+                    <img src="{{ profileDetails?.image }}" alt="">
+                </div>
+                <div class="no-image" *ngIf="!profileDetails?.image && !selectedFile">
+                    <div>{{ profileDetails?.firstName.charAt(0) }}</div>
+                </div>
+                <div class="profile-name">{{ profileDetails?.firstName }} {{ profileDetails?.lastName }}</div>
+                <div style="display: flex;">
+                    <button mat-button color="primary" class="upload-utton" (click)="imageInput.click()">
+                        <mat-icon>cloud_upload</mat-icon>
+                        Upload
+                    </button>
+                    <button *ngIf="profileDetails?.image || selectedFile" mat-button color="warn" class="upload-utton" (click)="removeImage()">
+                        <mat-icon>delete</mat-icon>
+                        Remove
+                    </button>
+                </div>
+                <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+                    style="display: none;">
+            </div>
+            <div class="profile-details-container">
+                <div class="profile-details-input-container">
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>First Name</mat-label>
+                            <input matInput type="text" formControlName="firstName">
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.errors?.required">First
+                                name is required</small>
+                            <small *ngIf="profileForm.controls.firstName.errors?.maxLength">First name cannot exceed 25
+                                characters</small>
+                            <small *ngIf="profileForm.controls.firstName.errors?.pattern">Enter valid first name</small>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput type="text" formControlName="lastName">
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.errors?.required">Last
+                                name is required</small>
+                            <small *ngIf="profileForm.controls.lastName.errors?.maxLength">Last name cannot exceed 25
+                                characters</small>
+                            <small *ngIf="profileForm.controls.lastName.errors?.pattern">Enter valid last name</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-details-input-container">
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Email Address</mat-label>
+                            <input matInput type="email" formControlName="email">
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.email.touched && profileForm.controls.email.errors?.required">Email
+                                address is required</small>
+                            <small *ngIf="profileForm.controls.email.errors?.email">Enter valid email
+                                address</small>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Contact Number</mat-label>
+                            <input matInput type="text" formControlName="contactNumber">
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.contactNumber.touched && profileForm.controls.contactNumber.errors?.required">Contact
+                                number is required</small>
+                            <small *ngIf="profileForm.controls.contactNumber.errors?.pattern">Enter valid contact
+                                number</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="profile-details-input-container">
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password"
+                                [type]="hidePassword ? 'password' : 'text'">
+                            <mat-icon style="cursor: pointer;" matSuffix (click)="hidePassword = !hidePassword">
+                                {{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.password.touched && profileForm.controls.password.errors?.required">Password
+                                is required</small>
+                            <small *ngIf="profileForm.controls.password.errors?.pattern">Password must contain at least
+                                8 characters, one uppercase letter, one lowercase letter, a number, and a special
+                                character</small>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <mat-form-field class="form-field">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput type="password" formControlName="confirmPassword"
+                                [type]="hideConfPassword ? 'password' : 'text'">
+                            <mat-icon style="cursor: pointer;" matSuffix (click)="hideConfPassword = !hideConfPassword">
+                                {{hideConfPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        </mat-form-field>
+                        <div class="error-message">
+                            <small
+                                *ngIf="profileForm.controls.confirmPassword.touched && profileForm.controls.confirmPassword.errors?.required">Confirm
+                                password is required</small>
+                            <small *ngIf="(this.profileForm.value.password != this.profileForm.value.confirmPassword && !profileForm.controls.confirmPassword.errors?.required)">
+                                Password does not match</small>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="button-container" style="margin-top: 1rem; margin-right: 1.5rem;">
+                    <button class="submit-button" mat-raised-button color="primary" (click)="updateProfile()"
+                        [disabled]="!profileForm.valid">Update</button>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>

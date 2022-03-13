@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <span>CMS</span>
+    <div class="profile-details">
+        <div class="profile-icon" *ngIf="profileDetails?.image === ''">
+            {{profileDetails?.firstName.charAt(0)}}
+        </div> 
+        <div class="profile-image" *ngIf="profileDetails?.image">
+            <img src="{{profileDetails?.image}}" alt="" style="height: 100%; width: 100%; border-radius: 50%;">
+        </div> 
+        <span>{{profileDetails?.firstName}} {{profileDetails?.lastName}}</span>
+    </div>
+</mat-toolbar>

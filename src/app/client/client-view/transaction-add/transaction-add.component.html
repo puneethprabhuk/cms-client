@@ -1,0 +1,79 @@
+<div class="transaction-add">
+    <h2>{{ formTitle }}</h2>
+    <form [formGroup]="transactionForm">
+        <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Type of assignment</mat-label>
+                    <mat-select formControlName="typeOfAssignment">
+                        <mat-option *ngFor="let type of typeOfAssignment" [value]="type">{{type}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.typeOfAssignment.touched && transactionForm.controls.typeOfAssignment.errors?.required">Type
+                        of assignment
+                        is required</small>
+                </div>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Fees</mat-label>
+                    <input matInput type="text" formControlName="fees">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.fees.touched && transactionForm.controls.fees.errors?.required">Fees
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.fees.errors?.pattern">Enter valid fees</small>
+                </div>
+            </div>
+        </div>
+        <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Financial year</mat-label>
+                    <input matInput type="text" formControlName="financialYear">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.financialYear.touched && transactionForm.controls.financialYear.errors?.required">Financial
+                        year
+                        is required</small>
+                </div>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Assessment year</mat-label>
+                    <input matInput type="text" formControlName="assessmentYear">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.assessmentYear.touched && transactionForm.controls.assessmentYear.errors?.required">Assessment
+                        year
+                        is required</small>
+                </div>
+            </div>
+        </div>
+        <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option *ngFor="let status of statusList" [value]="status">{{status}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.status.touched && transactionForm.controls.status.errors?.required">Status
+                        year
+                        is required</small>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button mat-raised-button color="primary" (click)="addTransaction()" [disabled]="!transactionForm.valid">{{buttonText}}</button>
+            <button mat-stroked-button color="primary" class="close-button" (click)="closeModal()">Close</button>
+        </div>
+    </form>
+</div>

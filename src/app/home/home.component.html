@@ -1,0 +1,111 @@
+<div class="home-details">
+  <div class="count-container">
+    <mat-card class="count-box" style="background-color: #ECFEEF; color: #3bbd51;">
+      <div class="total-count">
+        <div class="count-header">Total Clients</div>
+        <div class="count">{{totalClients}}</div>
+      </div>
+      <div class="total-count">
+        <div class="count-header">Clients Added Today</div>
+        <div class="count">{{todaysClients}}</div>
+      </div>
+    </mat-card>
+    <mat-card class="count-box" style="background-color: #F4F1FE; color: #5c41b6;">
+      <div class="total-count">
+        <div class="count-header">Total Transaction</div>
+        <div class="count">{{totalTransaction}}</div>
+      </div>
+      <div class="total-count">
+        <div class="count-header">Today's Transaction</div>
+        <div class="count">{{todaysTransaction}}</div>
+      </div>
+    </mat-card>
+    <mat-card class="count-box" style="background-color: #FEF2EB; color: #b36b42;">
+      <div class="total-count">
+        <div class="count-header">Total Remuneration</div>
+        <div class="count">{{this.totalRemuneration}}</div>
+      </div>
+      <div class="total-count">
+        <div class="count-header">Today's Remuneration</div>
+        <div class="count">{{todaysRemuneration}}</div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="home-table-container">
+    <mat-card class="small-container">
+      <div class="small-header" style="display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0">Newly Added Clients</h2>
+        <div class="button-container" style="display: flex; justify-content: flex-end;">
+          <button mat-button color="primary" [routerLink]="['/client/client-list']"
+            *ngIf="clientDetails && clientDetails.length > 0">
+            View All
+            <mat-icon>arrow_right_alt</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="empty-container" *ngIf="clientDetails && clientDetails.length === 0">
+        <div class="img-container"></div>
+      </div>
+      <div style="margin-top: 1rem;">
+        <div class="client-details-container" *ngFor="let client of clientDetails">
+          <div class="client-name-container">
+            <div class="client-name">{{ client?.name }}</div>
+            <span class="client-type">{{ client?.typeOfAssignment }}</span>
+          </div>
+          <button mat-button color="primary" [routerLink]="['/client/client-view']" [queryParams]="{id: client?._id}">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="large-container">
+      <div class="large-header" style="display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0">Latest Transactions</h2>
+        <button mat-button color="primary" [routerLink]="['/transaction/transaction-list']"
+          *ngIf="transactionDetails && transactionDetails.length > 0">
+          See All Transactions
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
+      </div>
+      <div class="empty-container" *ngIf="transactionDetails && transactionDetails.length === 0">
+        <div class="img-container"></div>
+      </div>
+      <div class="table" *ngIf="transactionDetails && transactionDetails.length > 0">
+        <table mat-table [dataSource]="transactionDetails">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.name }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="typeOfAssignment">
+            <th mat-header-cell *matHeaderCellDef>Type of Assignment</th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.typeOfAssignment }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fees">
+            <th mat-header-cell *matHeaderCellDef>Fees</th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.fees }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedDate">
+            <th mat-header-cell *matHeaderCellDef>Updated Date</th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.updatedAt | date: 'mediumDate' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let transaction"
+              [ngClass]="{'pending': transaction.status === 'Pending', 'received' : transaction.status === 'Received' }">
+              {{ transaction.status }} </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+    </mat-card>
+  </div>
+</div>

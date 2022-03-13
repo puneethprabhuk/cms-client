@@ -1,0 +1,44 @@
+.client-list {
+    padding: 1rem;
+    &-heading {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-table-container {
+        height: 75vh;
+        .table {
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+}
+
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+    width: 150px;
+}
+
+.mat-column-emailAddress {
+    width: 180px;
+}
+
+.mat-column-address {
+    width: 180px;
+}
+
+.mat-column-contactNumber {
+    width: 140px;
+}
+
+.mat-column-createdDate {
+    width: 100px;
+}
+
+.mat-column-updatedDate {
+    width: 100px;
+}

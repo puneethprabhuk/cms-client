@@ -1,0 +1,29 @@
+<div class="navbar">
+    <div class="navbar-header">Dashboard</div>
+    <ul class="navbar-container">
+        <li class="navbar-item" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/cms/home']" routerLinkActive="navbar-item-active">
+            <mat-icon class="navbar-icon">home</mat-icon>
+            <a class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item" [routerLink]="['/client/client-list']" routerLinkActive="navbar-item-active">
+            <mat-icon class="navbar-icon">people</mat-icon>
+            <a class="navbar-link">Clients</a>
+        </li>
+        <li class="navbar-item" [routerLink]="['/transaction/transaction-list']" routerLinkActive="navbar-item-active">
+            <mat-icon class="navbar-icon">compare_arrows</mat-icon>
+            <a class="navbar-link">Transaction</a>
+        </li>
+        <li class="navbar-item" [routerLink]="['/client/client-add']" routerLinkActive="navbar-item-active">
+            <mat-icon class="navbar-icon">person_add</mat-icon>
+            <a class="navbar-link">Add New Client</a>
+        </li>
+        <li class="navbar-item" [routerLink]="['/profile/profile']" routerLinkActive="navbar-item-active">
+            <mat-icon class="navbar-icon">person</mat-icon>
+            <a class="navbar-link">Profile</a>
+        </li>
+        <li class="navbar-item" (click)="logout()">
+            <mat-icon class="navbar-icon">exit_to_app</mat-icon>
+            <a class="navbar-link">Logout</a>
+        </li>
+    </ul>
+</div>
