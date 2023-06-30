@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { TYPE_OF_ASSIGNMENT, STATUS, NUMBER_REGEX } from "src/app/core/constants/constant";
+import { TYPE_OF_ASSIGNMENT, STATUS, NUMBER_REGEX, MODE_OF_FILING } from "src/app/core/constants/constant";
 import { ClientViewService } from "../client-view.service";
 
 
@@ -36,8 +36,8 @@ export class TransactionAddComponentPopup implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TransactionAddComponent, {
-      height: '65%',
-      width: '50%',
+      height: '80%',
+      width: '55%',
       data: {
         transactionDetails: this.transactionDetails,
         clientId: this.clientId
@@ -69,9 +69,9 @@ export class TransactionAddComponent implements OnInit {
   clientId: any;
   currentYear = moment().format('YYYY');
   nextYear: any;
-  nextAssessmentYear: any;
   financialYear: any;
   assessmentYear: any;
+  modeOfFiling = MODE_OF_FILING;
 
   constructor(public dialogRef: MatDialogRef<Body>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -81,9 +81,8 @@ export class TransactionAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.nextYear = parseInt(this.currentYear) + 1;
-    this.nextAssessmentYear = this.nextYear + 1;
-    this.financialYear = `${this.currentYear}-${this.nextYear.toString().slice(-2)}`;
-    this.assessmentYear = `${this.nextYear.toString()}-${this.nextAssessmentYear.toString().slice(-2)}`
+    this.financialYear = `${Number(this.currentYear) - 1}-${this.currentYear.toString().slice(-2)}`;
+    this.assessmentYear = `${this.currentYear.toString()}-${this.nextYear.toString().slice(-2)}`
     this.transactionDetails = this.data.transactionDetails;
     this.clientId = this.data.clientId;
     if (this.transactionDetails) {
@@ -98,16 +97,74 @@ export class TransactionAddComponent implements OnInit {
 
   buildTransactionForm() {
     this.transactionForm = this.fb.group({
-      typeOfAssignment: [this.transactionDetails ? this.transactionDetails.typeOfAssignment : '',
-      [
-        Validators.required
-      ]
+      typeOfAssignment: [this.transactionDetails ? this.transactionDetails.typeOfAssignment : '', {
+        validators: [
+          Validators.required
+        ],
+        updateOn: 'blur'
+      }
       ],
-      fees: [this.transactionDetails ? this.transactionDetails.fees : '',
-      [
-        Validators.required,
-        Validators.pattern(NUMBER_REGEX)
-      ]
+      fees: [this.transactionDetails ? this.transactionDetails.fees : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      totalIncome: [this.transactionDetails ? this.transactionDetails.totalIncome : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      netIncome: [this.transactionDetails ? this.transactionDetails.netIncome : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      taxPaid: [this.transactionDetails ? this.transactionDetails.taxPaid : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      taxRefund: [this.transactionDetails ? this.transactionDetails.taxRefund : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      modeOfFiling: [this.transactionDetails ? this.transactionDetails.modeOfFiling : '', 
+      {
+        validators: [
+          Validators.required,
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      dateOfFiling: [this.transactionDetails ? this.transactionDetails.dateOfFiling : '', 
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern(NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }
       ],
       financialYear: [this.transactionDetails ? this.transactionDetails.financialYear : this.financialYear,
       [

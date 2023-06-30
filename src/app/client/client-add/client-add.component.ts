@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
-import { TYPE_OF_ASSIGNMENT, STATUS, NAME_REGEX, CONTACT_NUMBER_REGEX, NUMBER_REGEX, ADD_CLIENT_TITLE, ADD_CLIENT_MESSAGE, SOMETHING_WENT_WRONG } from '../../core/constants/constant'
+import { TYPE_OF_ASSIGNMENT, MODE_OF_FILING, STATUS, NAME_REGEX, CONTACT_NUMBER_REGEX, NUMBER_REGEX, ADD_CLIENT_TITLE, ADD_CLIENT_MESSAGE, SOMETHING_WENT_WRONG, PAN_REGEX, EMAIL_REGEX } from '../../core/constants/constant'
 import { ClientAddService } from './client-add.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
@@ -13,14 +13,16 @@ import * as moment from 'moment';
 })
 export class ClientAddComponent implements OnInit {
 
-  typeOfAssignment = TYPE_OF_ASSIGNMENT
+  typeOfAssignment = TYPE_OF_ASSIGNMENT;
+  modeOfFiling = MODE_OF_FILING;
   statusList = STATUS;
   clientForm: FormGroup;
   currentYear = moment().format('YYYY');
   nextYear: any;
-  nextAssessmentYear: any;
   financialYear: any;
   assessmentYear: any;
+  hidePassword = true;
+
   
   constructor(private fb: FormBuilder,
     private clientAddService: ClientAddService,
@@ -28,39 +30,76 @@ export class ClientAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.nextYear = parseInt(this.currentYear) + 1;
-    this.nextAssessmentYear = this.nextYear + 1;
-    this.financialYear = `${this.currentYear}-${this.nextYear.toString().slice(-2)}`;
-    this.assessmentYear = `${this.nextYear.toString()}-${this.nextAssessmentYear.toString().slice(-2)}`
-
+    this.financialYear = `${(Number(this.currentYear) - 1).toString()}-${(Number(this.currentYear)).toString().slice(-2)}`;
+    this.assessmentYear = `${this.currentYear.toString()}-${this.nextYear.toString().slice(-2)}`
     this.buildClientForm();
   }
 
   buildClientForm() {
     this.clientForm = this.fb.group({
-      firstName: ['', [
-        Validators.required,
-        Validators.maxLength(25),
-        Validators.pattern(NAME_REGEX)
-      ]],
-      lastName: ['', [
-        Validators.required,
-        Validators.maxLength(25),
-        Validators.pattern(NAME_REGEX)
-      ]],
-      contactNumber: ['', [
-        Validators.required,
-        Validators.pattern(CONTACT_NUMBER_REGEX)
-      ]],
-      emailAddress: ['', [
-        Validators.required,
-        Validators.email
-      ]],
+      firstName: ['', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(25),
+          Validators.pattern(NAME_REGEX)
+        ],
+        updateOn: 'blur'
+      }],
+      lastName: ['', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(25),
+          Validators.pattern(NAME_REGEX)
+        ],
+        updateOn: 'blur'
+      }],
+      contactNumber: ['', {
+        validators: [
+          Validators.required,
+          Validators.pattern(CONTACT_NUMBER_REGEX)
+        ],
+        updateOn: 'blur'
+      }],
+      emailAddress: ['', {
+        validators: [
+          Validators.required,
+          Validators.pattern(EMAIL_REGEX)
+        ],
+        updateOn: 'blur'
+      }],
+      pan: ['', {
+        validators: [
+          Validators.required,
+          Validators.pattern(PAN_REGEX)
+        ],
+        updateOn: 'blur'
+      }
+      ],
+      itPassword: ['', [Validators.required]],
       address: ['', [Validators.required]],
       typeOfAssignment: ['', [Validators.required]],
       fees: ['', [
         Validators.required,
         Validators.pattern(NUMBER_REGEX)
       ]],
+      totalIncome: ['', [
+        Validators.required,
+        Validators.pattern(NUMBER_REGEX)
+      ]],
+      netIncome: ['', [
+        Validators.required,
+        Validators.pattern(NUMBER_REGEX)
+      ]],
+      taxPaid: ['', [
+        Validators.required,
+        Validators.pattern(NUMBER_REGEX)
+      ]],
+      taxRefund: ['', [
+        Validators.required,
+        Validators.pattern(NUMBER_REGEX)
+      ]],
+      modeOfFiling: ['', [Validators.required]],
+      dateOfFiling: ['', [Validators.required]],
       financialYear: [this.financialYear, [Validators.required]],
       assessmentYear: [this.assessmentYear, [Validators.required]],
       remarks: [''],
@@ -75,6 +114,12 @@ export class ClientAddComponent implements OnInit {
         financialYear: this.clientForm.value.financialYear,
         assessmentYear: this.clientForm.value.assessmentYear,
         fees: this.clientForm.value.fees,
+        totalIncome: this.clientForm.value.totalIncome,
+        netIncome: this.clientForm.value.netIncome,
+        taxPaid: this.clientForm.value.taxPaid,
+        taxRefund: this.clientForm.value.taxRefund,
+        modeOfFiling: this.clientForm.value.modeOfFiling,
+        dateOfFiling: this.clientForm.value.dateOfFiling,
         status: this.clientForm.value.status,
       }
     ]
@@ -84,7 +129,7 @@ export class ClientAddComponent implements OnInit {
       this.clearClient();
       this.toastr.success(ADD_CLIENT_MESSAGE, ADD_CLIENT_TITLE);
     }, (error) => {
-      if(error.error && error.error.code) {
+      if (error.error && error.error.code) {
         this.toastr.error(error.error.message, ADD_CLIENT_TITLE);
       } else {
         this.toastr.error(SOMETHING_WENT_WRONG, ADD_CLIENT_TITLE);
@@ -94,8 +139,8 @@ export class ClientAddComponent implements OnInit {
 
   clearClient() {
     this.clientForm.reset({});
-    Object.keys(this.clientForm.controls).forEach(key =>{
-      this.clientForm.controls[key].setErrors(null)
-    });
+    // Object.keys(this.clientForm.controls).forEach(key => {
+    //   this.clientForm.controls[key].setErrors(null)
+    // });
   }
 }

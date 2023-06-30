@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
         this.profileDetails = profile.body;
       }
     }, (error) => {
-      this.toastr.error(SOMETHING_WENT_WRONG, SERVER_ERROR);
+      // this.toastr.error(SOMETHING_WENT_WRONG, SERVER_ERROR);
     });
   }
 

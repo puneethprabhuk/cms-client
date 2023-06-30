@@ -1,5 +1,12 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 app-client-list,
 app-client-add,
@@ -12,13 +19,13 @@ app-home {
 
 
 .pending {
-    background-color: #FFD7D7; 
+    background-color: #FFD7D7;
     text-align: center;
     color: red;
 }
 
 .received {
-    background-color: #e5faf2; 
+    background-color: #e5faf2;
     color: green;
     text-align: center;
 }
@@ -30,15 +37,44 @@ app-home {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     button {
         margin-top: 2rem;
     }
+
     .img-container {
         height: 70%;
         width: 70%;
         background-color: red;
         background: url('./assets//images/no-data.png') no-repeat center center / cover;
-    }  
+    }
 }
 
+table {
+    width: 100% !important;
+}
 
+.fa-indian-rupee-sign {
+    font-size: 12px;
+}
+
+.search-header {
+    padding: 1.2rem 0;
+    .search-container {
+        padding: .8em;
+        width: 15rem;
+        border-radius: 8px;
+        border: 1px solid lightgray;
+        display: flex;
+        align-items: center;
+        i {
+            color: gray;
+        }
+        .custom-search {
+            outline: none;
+            border: none;
+            width: 100%;
+            padding-right: .5em;
+        }
+    }
+}

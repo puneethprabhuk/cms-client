@@ -4,5 +4,6 @@
 
 export const environment = {
   production: false,
-  baseurl: "https://cms-host.herokuapp.com/"
+  // baseurl: "https://cms-host.herokuapp.com/"
+  baseurl: "http://localhost:5000/"
 };

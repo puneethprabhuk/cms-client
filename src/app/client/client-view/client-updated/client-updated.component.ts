@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from "@angular
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from "ngx-toastr";
-import { CONTACT_NUMBER_REGEX, NAME_REGEX } from "src/app/core/constants/constant";
+import { CONTACT_NUMBER_REGEX, NAME_REGEX, PAN_REGEX } from "src/app/core/constants/constant";
 import { ClientViewService } from "../client-view.service";
 
 export interface DialogData {
@@ -104,6 +104,19 @@ export class ClientUpdatedComponent implements OnInit {
       ],
       address: [
         this.clientDetails?.address ? this.clientDetails?.address : '',
+        [
+          Validators.required
+        ]
+      ],
+      pan: [
+        this.clientDetails?.pan ? this.clientDetails?.pan : '',
+        [
+          Validators.required,
+          Validators.pattern(PAN_REGEX)
+        ]
+      ],
+      itPassword: [
+        this.clientDetails?.itPassword ? this.clientDetails?.itPassword : '',
         [
           Validators.required
         ]

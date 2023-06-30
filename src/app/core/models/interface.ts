@@ -14,6 +14,8 @@ export interface Client {
     contactNumber: number;
     address: string;
     remarks: string;
+    pan: string;
+    itPassword: string;
     transactionDetails: Transaction[];
 }
 
@@ -22,6 +24,12 @@ export interface Transaction {
     status: string;
     typeOfAssignment: string;
     fees: number;
+    totalIncome: number;
+    netIncome: number;
+    taxPaid: number;
+    taxRefund: number;
     financialYear: string;
     assessmentYear: string; 
+    modeOfFiling: string,
+    dateOfFiling: string,
 }

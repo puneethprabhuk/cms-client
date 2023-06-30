@@ -55,8 +55,7 @@ export class ApiService {
       optionsData.reportProgress = options.reportProgress;
       optionsData.withCredentials = options.withCredentials;
     }
-    let url = '';
-    url = `${this.apiUrl}${path}`;
+    const url = `${this.apiUrl}${path}`;
     return this.http
       .post<any>(url, body, optionsData)
       .pipe(catchError((error) => this.handleError(error)));

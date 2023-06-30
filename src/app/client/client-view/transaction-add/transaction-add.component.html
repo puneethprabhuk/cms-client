@@ -18,18 +18,90 @@
             </div>
             <div class="input-container">
                 <mat-form-field class="form-field">
-                    <mat-label>Fees</mat-label>
-                    <input matInput type="text" formControlName="fees">
+                    <mat-label>Mode of Filing</mat-label>
+                    <mat-select formControlName="modeOfFiling">
+                        <mat-option [value]="mode" *ngFor="let mode of modeOfFiling">{{mode}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <div class="error-message">
                     <small
-                        *ngIf="transactionForm.controls.fees.touched && transactionForm.controls.fees.errors?.required">Fees
+                        *ngIf="transactionForm.controls.modeOfFiling.touched && transactionForm.controls.modeOfFiling.errors?.required">Mode
+                        of
                         is required</small>
-                    <small *ngIf="transactionForm.controls.fees.errors?.pattern">Enter valid fees</small>
                 </div>
             </div>
         </div>
         <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Total Income</mat-label>
+                    <input matInput type="text" formControlName="totalIncome">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.totalIncome.touched && transactionForm.controls.totalIncome.errors?.required">Total
+                        income
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.totalIncome.errors?.pattern">Enter valid amount</small>
+                </div>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Net Income</mat-label>
+                    <input matInput type="text" formControlName="netIncome">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.netIncome.touched && transactionForm.controls.netIncome.errors?.required">Net
+                        income
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.netIncome.errors?.pattern">Enter valid amount</small>
+                </div>
+            </div>
+        </div>
+        <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Tax Paid</mat-label>
+                    <input matInput type="text" formControlName="taxPaid">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.taxPaid.touched && transactionForm.controls.taxPaid.errors?.required">Tax
+                        paid
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.fees.errors?.pattern">Enter valid amount</small>
+                </div>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Tax Refund</mat-label>
+                    <input matInput type="text" formControlName="taxRefund">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.taxRefund.touched && transactionForm.controls.taxRefund.errors?.required">Tax
+                        refund
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.fees.errors?.pattern">Enter valid amount</small>
+                </div>
+            </div>
+        </div>
+        <div class="transaction-add-input-container">
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Date of Filing</mat-label>
+                    <input formControlName="dateOfFiling" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.dateOfFiling.touched && transactionForm.controls.dateOfFiling.errors?.required">Date
+                        of filing
+                        is required</small>
+                </div>
+            </div>
             <div class="input-container">
                 <mat-form-field class="form-field">
                     <mat-label>Financial year</mat-label>
@@ -42,6 +114,8 @@
                         is required</small>
                 </div>
             </div>
+        </div>
+        <div class="transaction-add-input-container">
             <div class="input-container">
                 <mat-form-field class="form-field">
                     <mat-label>Assessment year</mat-label>
@@ -52,6 +126,19 @@
                         *ngIf="transactionForm.controls.assessmentYear.touched && transactionForm.controls.assessmentYear.errors?.required">Assessment
                         year
                         is required</small>
+                </div>
+            </div>
+            <div class="input-container">
+                <mat-form-field class="form-field">
+                    <mat-label>Remuneration</mat-label>
+                    <input matInput type="text" formControlName="fees">
+                </mat-form-field>
+                <div class="error-message">
+                    <small
+                        *ngIf="transactionForm.controls.fees.touched && transactionForm.controls.fees.errors?.required">Remuneration
+                        year
+                        is required</small>
+                    <small *ngIf="transactionForm.controls.fees.errors?.pattern">Enter valid amount</small>
                 </div>
             </div>
         </div>
@@ -72,7 +159,8 @@
             </div>
         </div>
         <div class="button-container">
-            <button mat-raised-button color="primary" (click)="addTransaction()" [disabled]="!transactionForm.valid">{{buttonText}}</button>
+            <button mat-raised-button color="primary" (click)="addTransaction()"
+                [disabled]="!transactionForm.valid">{{buttonText}}</button>
             <button mat-stroked-button color="primary" class="close-button" (click)="closeModal()">Close</button>
         </div>
     </form>
